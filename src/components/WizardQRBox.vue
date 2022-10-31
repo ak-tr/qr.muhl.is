@@ -1,6 +1,6 @@
 <template>
   <div class="qr-box">
-    <div class="qr-img"><span v-html="svg"></span></div>
+    <div class="qr-img"><span ref="svg" v-html="svg"></span></div>
   </div>
 </template>
 
@@ -18,9 +18,13 @@ export default {
   props: ["text"],
   methods: {
     generateQRCodeAndPopulate(value: string) {
+      (this.$refs.svg as HTMLElement).animate({ opacity: 0 }, 500);
       qrcode
         .toString(value)
-        .then((result: string) => this.svg = result);
+        .then((result: string) => {
+          (this.$refs.svg as HTMLElement).animate({ opacity: 1 }, 500);
+          this.svg = result
+        });
     }
   },
   mounted() {
@@ -48,7 +52,7 @@ span {
 }
 
 .qr-img:hover {
-  transform: scale(2);
+  transform: scale(2.5);
 } 
 .qr-img {
   width: 100%;
