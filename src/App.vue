@@ -24,5 +24,12 @@ export default {
   color: black;
   justify-content: center;
   align-items: center;
+  overflow-x: hidden;
+}
+
+@media only screen and (max-width: 700px) {
+  .container {
+    height: auto;
+  }
 }
 </style>
