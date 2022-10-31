@@ -18,11 +18,11 @@ export default {
   props: ["text"],
   methods: {
     generateQRCodeAndPopulate(value: string) {
-      (this.$refs.svg as HTMLElement).animate({ opacity: 0 }, 500);
+      (this.$refs.svg as HTMLElement).animate({ opacity: 0 }, 250);
       qrcode
         .toString(value)
         .then((result: string) => {
-          (this.$refs.svg as HTMLElement).animate({ opacity: 1 }, 500);
+          (this.$refs.svg as HTMLElement).animate({ opacity: 1 }, 250);
           this.svg = result
         });
     }
