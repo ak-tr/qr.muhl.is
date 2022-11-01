@@ -1,8 +1,8 @@
 <template>
   <div class="box">
     <WizardTextBox @value-change="onValueChange"/>
-    <sup>QR code will be generated as you type!</sup>
-    <WizardQRBox :text="text"/>
+    <sup>QR code will be generated as you type!<br>Hover the QR code to enlarge.</sup>
+    <WizardQRBox :text="text" />
   </div>
 </template>
 
@@ -31,8 +31,13 @@ export default {
 
 <style scoped>
 sup {
-  padding-top: 10px;
+  padding-top: 15px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
 }
+
 .box {
   display: grid;
   place-items: center;
