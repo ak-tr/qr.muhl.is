@@ -6,20 +6,47 @@
 
 <script lang="ts">
 import { TextareaHTMLAttributes } from '@vue/runtime-dom'
+const placeholders = ["https://muhl.is", "mailto:akif@muhl.is", "tel:+44777665544"]
+
 export default {
   name: "WizardTextBox",
+  data() {
+    return {
+      counter: 0,
+    };
+  },
   methods: {
     onKeyPress() {
       const textAreaRef = this.$refs.textarea as TextareaHTMLAttributes;
       const value = textAreaRef.value;
       this.$emit("valueChange", value);
     }
+  },
+  mounted() {
+    const textAreaRef = this.$refs.textarea as TextareaHTMLAttributes;
+    
+    setInterval(() => {
+      if (textAreaRef.value != "") {
+        return;
+      }
+
+      textAreaRef.placeholder = placeholders[this.counter];
+
+      this.counter++;
+      if (this.counter == placeholders.length) {
+        this.counter = 0
+      }
+    }, 2500);
   }
 }
 </script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+::placeholder {
+  opacity: 0.35;
+}
 
 input {
   width: 300px;
