@@ -20,11 +20,11 @@ export default {
   methods: {
     generateQRCodeAndPopulate(value: string) {
       const ref = this.$refs.svg as HTMLElement
-      ref.animate({ opacity: 0 }, 250);
+      ref.animate({ opacity: 0.25 }, 150);
       qrcode
         .toString(value)
         .then((result: string) => {
-          ref.animate({ opacity: 1 }, 250);
+          ref.animate({ opacity: 1 }, 150);
           this.svg = result
         });
     },
