@@ -19,13 +19,17 @@ export default {
   props: ["text"],
   methods: {
     generateQRCodeAndPopulate(value: string) {
-      (this.$refs.svg as HTMLElement).animate({ opacity: 0 }, 250);
+      const ref = this.$refs.svg as HTMLElement
+      ref.animate({ opacity: 0 }, 250);
       qrcode
         .toString(value)
         .then((result: string) => {
-          (this.$refs.svg as HTMLElement).animate({ opacity: 1 }, 250);
+          ref.animate({ opacity: 1 }, 250);
           this.svg = result
         });
+    },
+    isEmptyOrSpaces(str: string) {
+      return str === null || str.match(/^ *$/) !== null;
     }
   },
   mounted() {
@@ -33,11 +37,7 @@ export default {
   },
   watch: {
     text(value: string) {
-      const isEmptyOrSpaces = (str: string) => {
-        return str === null || str.match(/^ *$/) !== null;
-      }
-
-      if (isEmptyOrSpaces(value)) {
+      if (this.isEmptyOrSpaces(value)) {
         return this.generateQRCodeAndPopulate(this.default);
       }
 
@@ -65,13 +65,15 @@ span {
 
 .hitbox:hover + .qr-img {
   transform: scale(2.5);
-} 
+}
+
 .qr-img {
   width: 100%;
   height: 100%;
   transition: all 0.1s ease-in;
   z-index: 1;
 }
+
 .qr-box {
   height: 200px;
   width: 200px;
