@@ -56,7 +56,7 @@ span {
   position: absolute;
   height: 200px;
   width: 200px;
-  z-index: 2
+  z-index: 3;
 }
 
 .hitbox:hover {
@@ -71,7 +71,8 @@ span {
   width: 100%;
   height: 100%;
   transition: all 0.1s ease-in;
-  z-index: 1;
+  position: relative;
+  z-index: 2;
 }
 
 .qr-box {

@@ -3,12 +3,14 @@
     <WizardTextBox @value-change="onValueChange"/>
     <sup>QR code will be generated as you type!<br>Hover the QR code to enlarge.</sup>
     <WizardQRBox :text="text" />
+    <WizardTooltip />
   </div>
 </template>
 
 <script lang="ts">
 import WizardTextBox from "./WizardTextBox.vue";
 import WizardQRBox from "./WizardQRBox.vue";
+import WizardTooltip from "./WizardTooltip.vue";
 
 export default {
   name: "AppWizard",
@@ -20,6 +22,7 @@ export default {
   components: {
     WizardTextBox,
     WizardQRBox,
+    WizardTooltip,
   },
   methods: {
     onValueChange(value: string) {
