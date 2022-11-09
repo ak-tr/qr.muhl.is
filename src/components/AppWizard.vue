@@ -1,7 +1,10 @@
 <template>
   <div class="box">
-    <WizardTextBox @value-change="onValueChange"/>
-    <sup>QR code will be generated as you type!<br>Hover the QR code to enlarge.</sup>
+    <WizardTextBox @value-change="onValueChange" />
+    <sup
+      >QR code will be generated as you type!
+      <span v-if="!isMobile"><br />Hover the QR code to enlarge.</span></sup
+    >
     <WizardQRBox :text="text" ref="wizardQRBox" />
     <WizardTooltip @download="onRequestDownload" />
   </div>
@@ -17,7 +20,8 @@ export default {
   data() {
     return {
       text: "",
-    }
+      isMobile: this.$isMobile
+    };
   },
   components: {
     WizardTextBox,
@@ -31,8 +35,8 @@ export default {
     onRequestDownload() {
       (this.$refs.wizardQRBox as typeof WizardQRBox).downloadQRCode();
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -53,10 +57,9 @@ sup {
   padding: 15px;
   margin: 15px;
   background: rgb(255, 255, 255);
-  border: 1px solid rgb(0,0,0,.125);
-  border-radius: .25rem;
-  /* filter: drop-shadow(1px 5px 25px rgba(0, 0, 0, 10%)); */
-  box-shadow: 0 18px 35px rgba(50,50,93,.1),-1px 0 15px rgba(0,0,0,.07)!important;
+  border: 1px solid rgb(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  box-shadow: 0 18px 35px rgba(50, 50, 93, 0.1), -1px 0 15px rgba(0, 0, 0, 0.07) !important;
 }
 
 @media only screen and (max-width: 815px) {

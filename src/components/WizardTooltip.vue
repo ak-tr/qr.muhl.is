@@ -1,6 +1,7 @@
 <template>
   <div class="tooltip-bar">
     <svg
+      v-if="!isMobile"
       class="tooltip"
       @mouseenter="onMouseOver"
       @mouseleave="onMouseLeave"
@@ -45,6 +46,7 @@ export default {
   data() {
     return {
       isHovered: false,
+      isMobile: this.$isMobile,
     };
   },
   methods: {
