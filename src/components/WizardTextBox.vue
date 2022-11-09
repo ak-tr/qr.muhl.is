@@ -1,12 +1,20 @@
 <template>
   <div class="input">
-    <input ref="textarea" placeholder="Enter your text here..." @keyup="onKeyPress" />
+    <input
+      ref="textarea"
+      placeholder="Enter your text here..."
+      @keyup="onKeyPress"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { TextareaHTMLAttributes } from '@vue/runtime-dom'
-const placeholders = ["https://muhl.is", "mailto:akif@muhl.is", "tel:+44777665544"]
+import { TextareaHTMLAttributes } from "@vue/runtime-dom";
+const placeholders = [
+  "https://muhl.is",
+  "mailto:akif@muhl.is",
+  "tel:+44777665544",
+];
 
 export default {
   name: "WizardTextBox",
@@ -20,11 +28,11 @@ export default {
       const textAreaRef = this.$refs.textarea as TextareaHTMLAttributes;
       const value = textAreaRef.value;
       this.$emit("valueChange", value);
-    }
+    },
   },
   mounted() {
     const textAreaRef = this.$refs.textarea as TextareaHTMLAttributes;
-    
+
     setInterval(() => {
       if (textAreaRef.value != "") {
         return;
@@ -34,15 +42,15 @@ export default {
 
       this.counter++;
       if (this.counter == placeholders.length) {
-        this.counter = 0
+        this.counter = 0;
       }
     }, 2500);
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 ::placeholder {
   opacity: 0.35;
@@ -51,8 +59,8 @@ export default {
 input {
   width: 300px;
   height: 100%;
-  border: 1px solid rgba(0,0,0,.25);
-  border-radius: .25rem;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 0.25rem;
   background: white;
   color: black;
   resize: none;
@@ -67,6 +75,6 @@ input {
 }
 
 input:focus {
-  border: 1px solid rgba(0,0,0,1)
+  border: 1px solid rgba(0, 0, 0, 1);
 }
 </style>
