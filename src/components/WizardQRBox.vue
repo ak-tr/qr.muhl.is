@@ -7,44 +7,54 @@
 
 <script lang="ts">
 import qrcode from "qrcode";
+import fs from "fs";
 
 export default {
   name: "WizardQRBox",
   data() {
     return {
       svg: "",
-      default: "https://muhl.is"
+      default: "https://muhl.is",
+      value: "https://muhl.is",
     };
   },
   props: ["text"],
   methods: {
     generateQRCodeAndPopulate(value: string) {
-      const ref = this.$refs.svg as HTMLElement
+      const ref = this.$refs.svg as HTMLElement;
       ref.animate({ opacity: 0.25 }, 150);
-      qrcode
-        .toString(value)
-        .then((result: string) => {
-          ref.animate({ opacity: 1 }, 150);
-          this.svg = result
-        });
+      qrcode.toString(value).then((result: string) => {
+        ref.animate({ opacity: 1 }, 150);
+        this.svg = result;
+      });
     },
     isEmptyOrSpaces(str: string) {
       return str === null || str.match(/^ *$/) !== null;
-    }
+    },
+    downloadQRCode() {
+      qrcode
+        .toDataURL(this.value, { width: 1024, margin: 1 })
+        .then((result) => {
+          const link = document.createElement("a");
+          link.href = result;
+          link.download = `${this.value}.png`;
+          link.click();
+        });
+    },
   },
   mounted() {
-    this.generateQRCodeAndPopulate(this.default)
+    this.generateQRCodeAndPopulate(this.default);
   },
   watch: {
     text(value: string) {
-      if (this.isEmptyOrSpaces(value)) {
-        return this.generateQRCodeAndPopulate(this.default);
-      }
+      const isEmptyOrSpaces = this.isEmptyOrSpaces(value);
+      const string = isEmptyOrSpaces ? this.default : value;
+      this.value = string;
 
-      this.generateQRCodeAndPopulate(value);
-    }
-  }
-}
+      this.generateQRCodeAndPopulate(string);
+    },
+  },
+};
 </script>
 
 <style scoped>

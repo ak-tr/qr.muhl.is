@@ -2,8 +2,8 @@
   <div class="box">
     <WizardTextBox @value-change="onValueChange"/>
     <sup>QR code will be generated as you type!<br>Hover the QR code to enlarge.</sup>
-    <WizardQRBox :text="text" />
-    <WizardTooltip />
+    <WizardQRBox :text="text" ref="wizardQRBox" />
+    <WizardTooltip @download="onRequestDownload" />
   </div>
 </template>
 
@@ -27,7 +27,10 @@ export default {
   methods: {
     onValueChange(value: string) {
       this.text = value;
-    }
+    },
+    onRequestDownload() {
+      (this.$refs.wizardQRBox as typeof WizardQRBox).downloadQRCode();
+    },
   }
 }
 </script>
