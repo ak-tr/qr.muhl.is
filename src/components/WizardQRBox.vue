@@ -7,7 +7,6 @@
 
 <script lang="ts">
 import qrcode from "qrcode";
-import fs from "fs";
 
 export default {
   name: "WizardQRBox",
@@ -37,7 +36,7 @@ export default {
         .then((result) => {
           const link = document.createElement("a");
           link.href = result;
-          link.download = `${this.value}.png`;
+          link.download = `qr_${this.value}.png`;
           link.click();
         });
     },
